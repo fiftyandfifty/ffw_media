@@ -57,6 +57,7 @@ function setup_ffw_media_post_types() {
 		'publicly_queryable'=> true,
 		'show_ui' 			=> true,
 		'show_in_menu' 		=> true,
+		'menu_icon'         => FFW_MEDIA_PLUGIN_URL . '/assets/images/media.png',
 		'query_var' 		=> true,
 		'rewrite' 			=> $rewrite,
 		'map_meta_cap'      => true,
