@@ -19,21 +19,21 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * Renders the options page contents.
  *
  * @since 1.0
- * @global $ffw_staff_settings Array of all the SQCASH Options
+ * @global $ffw_media_settings Array of all the SQCASH Options
  * @return void
  */
-function ffw_staff_settings_page() {
-    global $ffw_staff_settings;
+function ffw_media_settings_page() {
+    global $ffw_media_settings;
 
-    $active_tab = isset( $_GET[ 'tab' ] ) && array_key_exists( $_GET['tab'], ffw_staff_get_settings_tabs() ) ? $_GET[ 'tab' ] : 'general';
+    $active_tab = isset( $_GET[ 'tab' ] ) && array_key_exists( $_GET['tab'], ffw_media_get_settings_tabs() ) ? $_GET[ 'tab' ] : 'general';
 
     ob_start();
     ?>
     <div class="wrap">
-        <h2>Staff Settings</h2>
+        <h2>Media Settings</h2>
         <h2 class="nav-tab-wrapper">
             <?php
-            foreach( ffw_staff_get_settings_tabs() as $tab_id => $tab_name ) {
+            foreach( ffw_media_get_settings_tabs() as $tab_id => $tab_name ) {
 
                 $tab_url = add_query_arg( array(
                     'settings-updated' => false,
@@ -52,8 +52,8 @@ function ffw_staff_settings_page() {
             <form method="post" action="options.php">
                 <table class="form-table">
                 <?php
-                settings_fields( 'ffw_staff_settings' );
-                do_settings_fields( 'ffw_staff_settings_' . $active_tab, 'ffw_staff_settings_' . $active_tab );
+                settings_fields( 'ffw_media_settings' );
+                do_settings_fields( 'ffw_media_settings_' . $active_tab, 'ffw_media_settings_' . $active_tab );
                 ?>
                 </table>
                 <style>
