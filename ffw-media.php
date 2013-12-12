@@ -85,6 +85,7 @@ final class FFW_MEDIA {
 
 
 
+
   /**
    * Include required files
    * @access private
@@ -134,6 +135,9 @@ function FFW_MEDIA() {
 }
 
 
+
+
+
 /**
  * Initiate
  * Run the FFW_MEDIA() function, which runs the instance of the FFW_MEDIA class.
@@ -150,5 +154,7 @@ if ( FFW_MEDIA_DEBUG ) {
   ini_set('display_errors','On');
   error_reporting(E_ALL);
 }
+
+
 
 

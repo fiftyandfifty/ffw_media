@@ -147,6 +147,34 @@ function ffw_media_setup_taxonomies() {
 
 	$slug     = defined( 'FFW_MEDIA_SLUG' ) ? FFW_MEDIA_SLUG : 'media';
 
+	/** Types */
+	$type_labels = array(
+		'name' 				=> __( 'Media Types', 'taxonomy general name', 'FFW_media' ),
+		'singular_name' 	=> __( 'Media Type', 'taxonomy singular name', 'FFW_media' ),
+		'search_items' 		=> __( 'Search Types', 'FFW_media'  ),
+		'all_items' 		=> __( 'All Types', 'FFW_media'  ),
+		'parent_item' 		=> __( 'Parent Type', 'FFW_media'  ),
+		'parent_item_colon' => __( 'Parent Type:', 'FFW_media'  ),
+		'edit_item' 		=> __( 'Edit Type', 'FFW_media'  ),
+		'update_item' 		=> __( 'Update Type', 'FFW_media'  ),
+		'add_new_item' 		=> __( 'Add New Type', 'FFW_media'  ),
+		'new_item_name' 	=> __( 'New Type Name', 'FFW_media'  ),
+		'menu_name' 		=> __( 'Types', 'FFW_media'  ),
+	);
+
+	$type_args = apply_filters( 'ffw_media_type_args', array(
+			'hierarchical' 		=> true,
+			'labels' 			=> apply_filters('ffw_media_type_labels', $type_labels),
+			'show_ui' 			=> true,
+			'query_var' 		=> 'media_type',
+			'rewrite' 			=> array('slug' => $slug . '/type', 'with_front' => false, 'hierarchical' => true ),
+			'capabilities'  	=> array( 'manage_terms','edit_terms', 'assign_terms', 'delete_terms' ),
+			'show_admin_column'	=> true
+		)
+	);
+	register_taxonomy( 'media_type', array('ffw_media'), $type_args );
+	register_taxonomy_for_object_type( 'media_type', 'ffw_media' );
+
 	/** Categories */
 	$category_labels = array(
 		'name' 				=> sprintf( _x( '%s Categories', 'taxonomy general name', 'FFW_media' ), ffw_media_get_label_singular() ),
@@ -164,7 +192,7 @@ function ffw_media_setup_taxonomies() {
 
 	$category_args = apply_filters( 'ffw_media_category_args', array(
 			'hierarchical' 		=> true,
-			'labels' 			=> apply_filters('ffw_media_category_labels', $category_labels),
+			'labels' 			=> apply_filters( 'ffw_media_category_labels', $category_labels ),
 			'show_ui' 			=> true,
 			'query_var' 		=> 'media_category',
 			'rewrite' 			=> array('slug' => $slug . '/category', 'with_front' => false, 'hierarchical' => true ),
@@ -175,8 +203,12 @@ function ffw_media_setup_taxonomies() {
 	register_taxonomy( 'media_category', array('ffw_media'), $category_args );
 	register_taxonomy_for_object_type( 'media_category', 'ffw_media' );
 
+
+	
+
 }
 add_action( 'init', 'ffw_media_setup_taxonomies', 0 );
+
 
 
 
