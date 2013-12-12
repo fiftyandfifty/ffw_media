@@ -106,7 +106,14 @@ function ffw_render_media_fields()
     <p><strong><?php _e( 'Media Information', 'ffw_media' ); ?></strong></p>
     <p>
         <label for="ffw_media_type">
-            <input type="text" name="ffw_media_type" id="ffw_media_type" value="<?php echo $ffw_media_type; ?>" style="width:80px;" />
+            <!-- <input type="text" name="ffw_media_type" id="ffw_media_type" value="<?php //echo $ffw_media_type; ?>" style="width:80px;" /> -->
+            <!-- <input type="radio" name="ffw_media_type" id="ffw_media_type" value="<?php //echo $ffw_media_type; ?>"/> -->
+            <select name="ffw_media_type" id="ffw_media_type">
+
+                <option value="0" disabled>-------------------</option>
+                <option value="picture">Picture</option>
+                <option value="video">Video</option>
+            </select>
             <?php _e( 'Media Type', 'ffw_media' );  ?>
         </label>
     </p>
