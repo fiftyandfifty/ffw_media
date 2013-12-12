@@ -14,8 +14,8 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  */
 
   // Register Scripts/Styles
-  wp_register_style( 'ffw_media-admin-js',  FFW_MEDIA_PLUGIN_DIR .'/assets/css/ffw_media-admin.css' );
-  wp_register_script('ffw_media-admin-css', FFW_MEDIA_PLUGIN_DIR .'/assets/js/ffw_media-admin.js', array('jquery'));
+  wp_register_style( 'ffw_media-admin-js',  FFW_MEDIA_PLUGIN_URL .'/assets/css/ffw_media-admin.css' );
+  wp_register_script('ffw_media-admin-css', FFW_MEDIA_PLUGIN_URL .'/assets/js/ffw_media-admin.js', array('jquery'));
 
   // Enqueue Scripts/Styles
   function ffw_media_admin_scripts()

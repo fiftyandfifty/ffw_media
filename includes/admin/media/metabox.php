@@ -75,10 +75,10 @@ add_action( 'save_post', 'ffw_media_meta_box_save' );
 
 
 
-/** Campaign Configuration *****************************************************************/
+/** Fifty Media Configuration *****************************************************************/
 
 /**
- * Campaign Metabox
+ * Fifty Media Metabox
  *
  * Extensions (as well as the core plugin) can add items to the main download
  * configuration metabox via the `ffw_media`_meta_box_fields` action.
@@ -106,20 +106,45 @@ function ffw_render_media_fields()
     <p><strong><?php _e( 'Media Information', 'ffw_media' ); ?></strong></p>
     <p>
         <label for="ffw_media_type">
-            <!-- <input type="text" name="ffw_media_type" id="ffw_media_type" value="<?php //echo $ffw_media_type; ?>" style="width:80px;" /> -->
-            <!-- <input type="radio" name="ffw_media_type" id="ffw_media_type" value="<?php //echo $ffw_media_type; ?>"/> -->
             <select name="ffw_media_type" id="ffw_media_type">
-
                 <option value="0" disabled>-------------------</option>
-                <option value="picture">Picture</option>
-                <option value="video">Video</option>
+                <option value="ffw_media_youtube" <?php selected( $ffw_media_type, 'ffw_media_youtube' ); ?>>Youtube Video</option>
+                <option value="ffw_media_vimeo" <?php selected( $ffw_media_type, 'ffw_media_vimeo' ); ?>>Vimeo Video</option>
+                <option value="ffw_media_flickr" <?php selected( $ffw_media_type, 'ffw_media_flickr' ); ?>>Flickr Gallery</option>
             </select>
             <?php _e( 'Media Type', 'ffw_media' );  ?>
         </label>
     </p>
 
-
     <?php
 
 }
 add_action( 'ffw_media_meta_box_fields', 'ffw_render_media_fields', 10 );
+
+
+function ffw_render_media_type_selection()
+{
+
+?>
+
+    <div id="ffw_media_types">
+        <div id="ffw_media_youtube-selected" style="display:none;">
+            <p><strong><?php _e( 'Youtube Video', 'ffw_media' ); ?></strong></p>
+            <p>Youtube Selected</p>
+        </div>
+
+        <div id="ffw_media_vimeo-selected" style="display:none;">
+            <p><strong><?php _e( 'Vimeo Video', 'ffw_media' ); ?></strong></p>
+            <p>Vimeo Selected</p>
+        </div>
+
+        <div id="ffw_media_flickr-selected" style="display:none;">
+            <p><strong><?php _e( 'Flickr Gallery', 'ffw_media' ); ?></strong></p>
+            <p>Flickr Selected</p>
+        </div>
+    </div>
+
+<?php
+
+}
+add_action( 'ffw_media_meta_box_fields', 'ffw_render_media_type_selection', 11 );
