@@ -57,7 +57,8 @@ function ffw_media_meta_box_save( $post_id) {
 
     // The default fields that get saved
     $fields = apply_filters( 'ffw_media_metabox_fields_save', array(
-            'ffw_media_type'
+            'ffw_media_type',
+            'ffw_media_type_url'
         )
     );
 
@@ -99,10 +100,13 @@ function ffw_render_media_fields()
 {
     global $post, $ffw_media_settings;
 
-    $ffw_media_type = get_post_meta( $post->ID, 'ffw_media_type', true );
+    $ffw_media_type     = get_post_meta( $post->ID, 'ffw_media_type', true );
+    $ffw_media_type_url = get_post_meta( $post->ID, 'ffw_media_type_url', true );
 
     ?>
     
+    <?php /* FFW_MEDIA_TYPE (select options)
+    ================================================== */ ?>
     <p><strong><?php _e( 'Media Information', 'ffw_media' ); ?></strong></p>
     <p>
         <label for="ffw_media_type">
@@ -116,35 +120,37 @@ function ffw_render_media_fields()
         </label>
     </p>
 
+    <pre><?php var_dump($ffw_media_type_url); ?></pre>
+    
+    <?php /* FFW_MEDIA_TYPES (expanded/selected views)
+    ================================================== */ ?>
+    <div id="ffw_media_types">
+        <div id="ffw_media_youtube-selected" style="display:none;">
+            <p><strong><?php _e( 'Youtube Video Details', 'ffw_media' ); ?></strong></p>
+            <label for="ffw_media_youtube-url">
+                <input type="text" id="ffw_media_youtube-url" value="<?php echo $ffw_media_type_url; ?>">
+                Youtube Video URL
+            </label>
+        </div>
+
+        <div id="ffw_media_vimeo-selected" style="display:none;">
+            <p><strong><?php _e( 'Vimeo Video Details', 'ffw_media' ); ?></strong></p>
+            <label for="ffw_media_vimeo-url">
+                <input type="text" id="ffw_media_vimeo-url" value="<?php echo $ffw_media_type_url; ?>">
+                Vimeo Video URL
+            </label>
+        </div>
+
+        <div id="ffw_media_flickr-selected" style="display:none;">
+            <p><strong><?php _e( 'Flickr Gallery Details', 'ffw_media' ); ?></strong></p>
+            <label for="ffw_media_flickr-url">
+                <input type="text" id="ffw_media_flickr-url" value="<?php echo $ffw_media_type_url; ?>">
+                Flickr Gallery URL
+            </label>
+        </div>
+    </div>
+
     <?php
 
 }
 add_action( 'ffw_media_meta_box_fields', 'ffw_render_media_fields', 10 );
-
-
-function ffw_render_media_type_selection()
-{
-
-?>
-
-    <div id="ffw_media_types">
-        <div id="ffw_media_youtube-selected" style="display:none;">
-            <p><strong><?php _e( 'Youtube Video', 'ffw_media' ); ?></strong></p>
-            <p>Youtube Selected</p>
-        </div>
-
-        <div id="ffw_media_vimeo-selected" style="display:none;">
-            <p><strong><?php _e( 'Vimeo Video', 'ffw_media' ); ?></strong></p>
-            <p>Vimeo Selected</p>
-        </div>
-
-        <div id="ffw_media_flickr-selected" style="display:none;">
-            <p><strong><?php _e( 'Flickr Gallery', 'ffw_media' ); ?></strong></p>
-            <p>Flickr Selected</p>
-        </div>
-    </div>
-
-<?php
-
-}
-add_action( 'ffw_media_meta_box_fields', 'ffw_render_media_type_selection', 11 );
