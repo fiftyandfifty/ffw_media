@@ -113,7 +113,6 @@ final class FFW_MEDIA {
 
     }
 
-
   }
 
 } /* end FFW_MEDIA class */

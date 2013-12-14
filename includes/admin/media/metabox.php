@@ -12,6 +12,7 @@
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
+
 /** All Downloads *****************************************************************/
 
 /**
@@ -62,7 +63,6 @@ function ffw_media_meta_box_save( $post_id) {
         )
     );
 
-
     foreach ( $fields as $field ) {
         if ( ! empty( $_POST[ $field ] ) ) {
             $new = apply_filters( 'ffw_media_metabox_save_' . $field, $_POST[ $field ] );
@@ -103,6 +103,7 @@ function ffw_render_media_fields()
     $ffw_media_type     = get_post_meta( $post->ID, 'ffw_media_type', true );
     $ffw_media_type_url = get_post_meta( $post->ID, 'ffw_media_type_url', true );
 
+
     ?>
     
     <?php /* FFW_MEDIA_TYPE (select options)
@@ -120,35 +121,42 @@ function ffw_render_media_fields()
         </label>
     </p>
 
-    <pre><?php var_dump($ffw_media_type_url); ?></pre>
     
     <?php /* FFW_MEDIA_TYPES (expanded/selected views)
     ================================================== */ ?>
     <div id="ffw_media_types">
         <div id="ffw_media_youtube-selected" style="display:none;">
-            <p><strong><?php _e( 'Youtube Video Details', 'ffw_media' ); ?></strong></p>
-            <label for="ffw_media_youtube-url">
-                <input type="text" id="ffw_media_youtube-url" value="<?php echo $ffw_media_type_url; ?>">
-                Youtube Video URL
-            </label>
+            <p><strong><?php _e( 'Youtube Video URL', 'ffw_media' ); ?></strong></p>
         </div>
-
         <div id="ffw_media_vimeo-selected" style="display:none;">
-            <p><strong><?php _e( 'Vimeo Video Details', 'ffw_media' ); ?></strong></p>
-            <label for="ffw_media_vimeo-url">
-                <input type="text" id="ffw_media_vimeo-url" value="<?php echo $ffw_media_type_url; ?>">
-                Vimeo Video URL
-            </label>
+            <p><strong><?php _e( 'Vimeo Video URL', 'ffw_media' ); ?></strong></p>
         </div>
 
         <div id="ffw_media_flickr-selected" style="display:none;">
-            <p><strong><?php _e( 'Flickr Gallery Details', 'ffw_media' ); ?></strong></p>
-            <label for="ffw_media_flickr-url">
-                <input type="text" id="ffw_media_flickr-url" value="<?php echo $ffw_media_type_url; ?>">
-                Flickr Gallery URL
-            </label>
+            <p><strong><?php _e( 'Flickr Gallery URL', 'ffw_media' ); ?></strong></p>
         </div>
+
+        <input type="text" name="ffw_media_type_url" id="ffw_media_type_url" value="<?php echo $ffw_media_type_url; ?>" style="display:none;">
     </div>
+    
+
+
+    <?php /* DEBUGGING (temp)
+    ================================================== */ 
+    $ffw_media_debugging = true;
+    if ( $ffw_media_debugging ) : ?>
+
+        <div id="ffw_media_debugging">
+            <h4>FFW_MEDIA_DEBUGGING</h4>
+            <pre>
+<?php 
+var_dump($ffw_media_type);
+var_dump($ffw_media_type_url);
+?>
+            </pre>
+        </div>
+
+    <?php endif; ?>
 
     <?php
 
