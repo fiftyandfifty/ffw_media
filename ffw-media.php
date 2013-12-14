@@ -100,6 +100,7 @@ final class FFW_MEDIA {
 
     // Required Plugin Files
     require_once FFW_MEDIA_PLUGIN_DIR . '/includes/functions.php';
+    require_once FFW_MEDIA_PLUGIN_DIR . '/includes/ajax.php';
     require_once FFW_MEDIA_PLUGIN_DIR . '/includes/admin/media/metabox.php';
     require_once FFW_MEDIA_PLUGIN_DIR . '/includes/posttypes.php';
     require_once FFW_MEDIA_PLUGIN_DIR . '/includes/scripts.php';
@@ -110,9 +111,7 @@ final class FFW_MEDIA {
         require_once FFW_MEDIA_PLUGIN_DIR . '/includes/admin/admin-pages.php';
         require_once FFW_MEDIA_PLUGIN_DIR . '/includes/admin/admin-notices.php';
         require_once FFW_MEDIA_PLUGIN_DIR . '/includes/admin/settings/display-settings.php';
-
     }
-
   }
 
 } /* end FFW_MEDIA class */

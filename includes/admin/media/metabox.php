@@ -59,7 +59,8 @@ function ffw_media_meta_box_save( $post_id) {
     // The default fields that get saved
     $fields = apply_filters( 'ffw_media_metabox_fields_save', array(
             'ffw_media_type',
-            'ffw_media_type_url'
+            'ffw_media_type_url',
+            'ffw_media_type_thumbnail'
         )
     );
 
@@ -100,8 +101,9 @@ function ffw_render_media_fields()
 {
     global $post, $ffw_media_settings;
 
-    $ffw_media_type     = get_post_meta( $post->ID, 'ffw_media_type', true );
-    $ffw_media_type_url = get_post_meta( $post->ID, 'ffw_media_type_url', true );
+    $ffw_media_type             = get_post_meta( $post->ID, 'ffw_media_type', true );
+    $ffw_media_type_url         = get_post_meta( $post->ID, 'ffw_media_type_url', true );
+    $ffw_media_type_thumbnail   = get_post_meta( $post->ID, 'ffw_media_type_thumbnail', true );
 
 
     ?>
@@ -138,6 +140,35 @@ function ffw_render_media_fields()
 
         <input type="text" name="ffw_media_type_url" id="ffw_media_type_url" value="<?php echo $ffw_media_type_url; ?>" style="display:none;">
     </div>
+
+
+    <?php /* GET THUMBNAIL
+    ================================================== */ ?>
+    <script>
+     // DOC READY, RUN FUNCS
+     // jQuery(document).ready(function($) {
+     //     $.ajax({
+     //       'type'  : 'post',
+     //       'url'   : ajaxurl,
+     //       'data'  : {
+     //         'action'  : 'ffw_media_set_thumb',
+     //         'url'     : '<?php $ffw_media_type_url; ?>'
+     //       },
+     //       success : function(response) { console.log('Ajax function sent, response:', response); },
+     //       error   : function(response) { alert('Error Saving Settings', response);}
+     //     });
+     // });
+    </script>
+
+    <?php 
+        // If the post has just been updated (in URL there will be $message=1)
+        if ( isset($_GET['message']) ) {
+            // Set some meta data (featured image)
+            // We need the functions from helpers.php
+            $ffw_media_type_service = get_video_service( $ffw_media_type_url );           
+        }
+     ?>
+
     
 
 
@@ -152,6 +183,7 @@ function ffw_render_media_fields()
 <?php 
 var_dump($ffw_media_type);
 var_dump($ffw_media_type_url);
+var_dump($ffw_media_type_service);
 ?>
             </pre>
         </div>
