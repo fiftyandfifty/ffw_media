@@ -163,9 +163,36 @@ function ffw_render_media_fields()
     <?php 
         // If the post has just been updated (in URL there will be $message=1)
         if ( isset($_GET['message']) ) {
-            // Set some meta data (featured image)
-            // We need the functions from helpers.php
-            $ffw_media_type_service = get_video_service( $ffw_media_type_url );           
+            // Set some meta data (featured image), uses /fifty-framework/functions/helpers.php
+            if ( preg_match('/youtube/', $ffw_media_type) || preg_match('/vimeo/', $ffw_media_type) ) {
+                // Then it's a video
+                $ffw_media_type_service     = get_video_service( $ffw_media_type_url );
+                $ffw_media_type_id          = get_video_id( $ffw_media_type_url );
+            } else {
+                // Then it's a flickr gallery
+                $ffw_media_type_service = 'flickr';
+                // @TODO get flickr thumb URL (or don't, and give fallback BG and let user set featured? )
+            }
+        } elseif ( !isset($_GET['message']) ) {
+            //
+        }
+
+        // If service is youtube, pass data_type param to get thumb
+        if ( $ffw_media_type_service == 'youtube' ) {
+            $ffw_media_type_thumb_url   = get_video_data( $ffw_media_type_url, 'thumbnail_large' );
+            // Set the meta as the thumb URL
+            update_post_meta( $post->ID, 'ffw_media_type_thumbnail', $ffw_media_type_thumb_url );
+
+            // @TODO Set featured image from URL 
+
+        // If it's vimeo, don't pass the data_type param, as func will hit API instead of genereating URL
+        } elseif ( $ffw_media_type_service == 'vimeo' ) {
+            $ffw_media_type_thumb_url   = get_video_data( $ffw_media_type_url );
+            // Set the meta as the thumb URL
+            update_post_meta( $post->ID, 'ffw_media_type_thumbnail', $ffw_media_type_thumb_url );
+
+            // @TODO Set featured image from URL 
+            
         }
      ?>
 
@@ -183,7 +210,12 @@ function ffw_render_media_fields()
 <?php 
 var_dump($ffw_media_type);
 var_dump($ffw_media_type_url);
+var_dump($ffw_media_type_thumbnail);
+var_dump(get_post_meta( $post->ID ));
+// These will only show on post update ($_GET['message'])
 var_dump($ffw_media_type_service);
+var_dump($ffw_media_type_id);
+var_dump($ffw_media_type_thumb_url);
 ?>
             </pre>
         </div>
