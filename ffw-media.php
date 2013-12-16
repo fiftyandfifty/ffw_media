@@ -71,7 +71,6 @@ final class FFW_MEDIA {
     if ( ! defined( 'FFW_MEDIA_PLUGIN_DIR' ) )
       define( 'FFW_MEDIA_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 
-    // Plugin Folder URL
     if ( ! defined( 'FFW_MEDIA_PLUGIN_URL' ) )
       define( 'FFW_MEDIA_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
@@ -101,13 +100,13 @@ final class FFW_MEDIA {
     // Required Plugin Files
     require_once FFW_MEDIA_PLUGIN_DIR . '/includes/functions.php';
     require_once FFW_MEDIA_PLUGIN_DIR . '/includes/ajax.php';
-    require_once FFW_MEDIA_PLUGIN_DIR . '/includes/admin/media/metabox.php';
     require_once FFW_MEDIA_PLUGIN_DIR . '/includes/posttypes.php';
     require_once FFW_MEDIA_PLUGIN_DIR . '/includes/scripts.php';
     require_once FFW_MEDIA_PLUGIN_DIR . '/includes/shortcodes.php';
 
     if( is_admin() ){
         //Admin Required Plugin Files
+        require_once FFW_MEDIA_PLUGIN_DIR . '/includes/admin/media/metabox.php';
         require_once FFW_MEDIA_PLUGIN_DIR . '/includes/admin/admin-pages.php';
         require_once FFW_MEDIA_PLUGIN_DIR . '/includes/admin/admin-notices.php';
         require_once FFW_MEDIA_PLUGIN_DIR . '/includes/admin/settings/display-settings.php';
