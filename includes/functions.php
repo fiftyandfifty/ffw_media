@@ -80,7 +80,7 @@ function ffw_media_set_featured_image_from_url( $img_url = NULL, $debug = true )
 
         // And finally assign featured image to post
         set_post_thumbnail( $post_id, $attach_id );
-    } else {
+    } elseif( has_post_thumbnail( $post->ID ) ) {
         // do nothing
     }
 }

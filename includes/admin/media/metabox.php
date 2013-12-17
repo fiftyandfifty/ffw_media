@@ -60,6 +60,7 @@ function ffw_media_meta_box_save( $post_id) {
     $fields = apply_filters( 'ffw_media_metabox_fields_save', array(
             'ffw_media_type',
             'ffw_media_type_url',
+            'ffw_media_type_id',
             'ffw_media_type_thumbnail'
         )
     );
@@ -110,6 +111,7 @@ function ffw_render_media_fields()
     // Set post meta as vars
     $ffw_media_type             = get_post_meta( $post->ID, 'ffw_media_type', true );
     $ffw_media_type_url         = get_post_meta( $post->ID, 'ffw_media_type_url', true );
+    $ffw_media_type_id          = get_post_meta( $post->ID, 'ffw_media_type_id', true );
     $ffw_media_type_thumbnail   = get_post_meta( $post->ID, 'ffw_media_type_thumbnail', true );
 
     ?>
@@ -175,6 +177,10 @@ function ffw_render_media_fields()
                 $ffw_media_type_service     = get_video_service( $ffw_media_type_url );
                 $ffw_media_type_id          = get_video_id( $ffw_media_type_url );
 
+                // Update post meta with video ID
+                update_post_meta( $post->ID, 'ffw_media_type_id', $ffw_media_type_id );
+                
+
                 ////////////////////////////////////////
                 // Y O U T U B E
                 ////////////////////////////////////////
@@ -183,8 +189,8 @@ function ffw_render_media_fields()
                     $ffw_media_type_thumb_url   = get_video_data( $ffw_media_type_url, 'thumbnail_large' );
                     // Set the meta as the thumb URL
                     update_post_meta( $post->ID, 'ffw_media_type_thumbnail', $ffw_media_type_thumb_url );
-                    // Set the attachment ID to the meta
-                    update_post_meta( $post->ID, 'ffw_media_type_attach_id', get_post_thumbnail_id($post->ID) );
+                    // @DEPRECATED Set the attachment ID to the meta
+                    // update_post_meta( $post->ID, 'ffw_media_type_attach_id', get_post_thumbnail_id($post->ID) );
                     // Set featured image from URL
                     ffw_media_set_featured_image_from_url( $ffw_media_type_thumb_url );
 
@@ -196,8 +202,8 @@ function ffw_render_media_fields()
                     $ffw_media_type_thumb_url   = get_video_data( $ffw_media_type_url, 'thumbnail_large' );
                     // Set the meta as the thumb URL
                     update_post_meta( $post->ID, 'ffw_media_type_thumbnail', $ffw_media_type_thumb_url );
-                    // Set the attachment ID to the meta
-                    update_post_meta( $post->ID, 'ffw_media_type_attach_id', get_post_thumbnail_id($post->ID) );
+                    // @DEPRECATED Set the attachment ID to the meta
+                    // update_post_meta( $post->ID, 'ffw_media_type_attach_id', get_post_thumbnail_id($post->ID) );
                     // Set featured image from URL
                     ffw_media_set_featured_image_from_url( $ffw_media_type_thumb_url );
                 }
