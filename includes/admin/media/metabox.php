@@ -61,7 +61,8 @@ function ffw_media_meta_box_save( $post_id) {
             'ffw_media_type',
             'ffw_media_type_url',
             'ffw_media_type_id',
-            'ffw_media_type_thumbnail'
+            'ffw_media_type_thumbnail',
+            'ffw_media_type_featured'
         )
     );
 
@@ -113,9 +114,22 @@ function ffw_render_media_fields()
     $ffw_media_type_url         = get_post_meta( $post->ID, 'ffw_media_type_url', true );
     $ffw_media_type_id          = get_post_meta( $post->ID, 'ffw_media_type_id', true );
     $ffw_media_type_thumbnail   = get_post_meta( $post->ID, 'ffw_media_type_thumbnail', true );
+    $ffw_media_type_featured    = get_post_meta( $post->ID, 'ffw_media_type_featured', true );
 
     ?>
+
+
+    <?php /* FFW_MEDIA_TYPE (featured toggle)
+    ================================================== */ ?>
+    <p><strong><?php _e( 'Featured', 'ffw_media' ); ?></strong></p>
+    <p>
+        <label for="ffw_media_type_featured">
+            <input type="checkbox" name="ffw_media_type_featured" id="ffw_media_type_featured" value="1" <?php checked( '1', $ffw_media_type_featured, true ); ?> />
+            <?php _e( 'Check this to add in featured slider on Media landing page.', 'ffw_media' );  ?>
+        </label>
+    </p>
     
+
     <?php /* FFW_MEDIA_TYPE (select options)
     ================================================== */ ?>
     <p><strong><?php _e( 'Media Information', 'ffw_media' ); ?></strong></p>
@@ -149,24 +163,6 @@ function ffw_render_media_fields()
         <input type="text" name="ffw_media_type_url" id="ffw_media_type_url" value="<?php echo $ffw_media_type_url; ?>" style="display:none;">
     </div>
 
-
-    <?php /* GET THUMBNAIL
-    ================================================== */ ?>
-    <script>
-     // DOC READY, RUN FUNCS
-     // jQuery(document).ready(function($) {
-     //     $.ajax({
-     //       'type'  : 'post',
-     //       'url'   : ajaxurl,
-     //       'data'  : {
-     //         'action'  : 'ffw_media_set_thumb',
-     //         'url'     : '<?php $ffw_media_type_url; ?>'
-     //       },
-     //       success : function(response) { console.log('Ajax function sent, response:', response); },
-     //       error   : function(response) { alert('Error Saving Settings', response);}
-     //     });
-     // });
-    </script>
 
     <?php 
         // If the post has just been updated (in URL there will be $message=1)
@@ -230,18 +226,19 @@ function ffw_render_media_fields()
 
     <?php /* DEBUGGING (temp)
     ================================================== */ 
-    $ffw_media_debugging = true;
+    $ffw_media_debugging = false;
     if ( $ffw_media_debugging ) : ?>
 
         <div id="ffw_media_debugging">
             <h4>FFW_MEDIA_DEBUGGING</h4>
             <pre>
 <?php 
-print '<h3> $ffw_media_type </h3>'; var_dump($ffw_media_type);
-print '<h3> $ffw_media_type_url </h3>'; var_dump($ffw_media_type_url);
-print '<h3> $ffw_media_type_thumbnail </h3>'; var_dump($ffw_media_type_thumbnail);
-print '<h3> $ffw_media_type_service </h3>'; var_dump($ffw_media_type_service);
-print '<h3> $ffw_media_type_id </h3>'; var_dump($ffw_media_type_id);
+print '<h3> $ffw_media_type </h3>';             var_dump($ffw_media_type);
+print '<h3> $ffw_media_type_url </h3>';         var_dump($ffw_media_type_url);
+print '<h3> $ffw_media_type_thumbnail </h3>';   var_dump($ffw_media_type_thumbnail);
+print '<h3> $ffw_media_type_service </h3>';     var_dump($ffw_media_type_service);
+print '<h3> $ffw_media_type_id </h3>';          var_dump($ffw_media_type_id);
+print '<h3> $ffw_media_type_featured </h3>';    var_dump($ffw_media_type_featured);
 
 print '<h3> POST META </h3>';
 var_dump(get_post_meta( $post->ID ));

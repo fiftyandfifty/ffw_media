@@ -99,7 +99,6 @@ final class FFW_MEDIA {
 
     // Required Plugin Files
     require_once FFW_MEDIA_PLUGIN_DIR . '/includes/functions.php';
-    require_once FFW_MEDIA_PLUGIN_DIR . '/includes/ajax.php';
     require_once FFW_MEDIA_PLUGIN_DIR . '/includes/posttypes.php';
     require_once FFW_MEDIA_PLUGIN_DIR . '/includes/scripts.php';
     require_once FFW_MEDIA_PLUGIN_DIR . '/includes/shortcodes.php';
