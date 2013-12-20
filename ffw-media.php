@@ -102,6 +102,7 @@ final class FFW_MEDIA {
     require_once FFW_MEDIA_PLUGIN_DIR . '/includes/posttypes.php';
     require_once FFW_MEDIA_PLUGIN_DIR . '/includes/scripts.php';
     require_once FFW_MEDIA_PLUGIN_DIR . '/includes/shortcodes.php';
+    // require_once FFW_MEDIA_PLUGIN_DIR . '/includes/category_sort.php';
 
     if( is_admin() ){
         //Admin Required Plugin Files
