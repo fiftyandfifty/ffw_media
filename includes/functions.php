@@ -84,3 +84,21 @@ function ffw_media_set_featured_image_from_url( $img_url = NULL, $debug = true )
         // do nothing
     }
 }
+
+
+/**
+ * Get the slud to return on the front end for themes
+ * @return [type] [description]
+ */
+function ffw_get_media_slug()
+{
+  global $ffw_media_settings;
+
+  $ffw_media_slug = defined( 'FFW_MEDIA_SLUG' ) ? FFW_MEDIA_SLUG : $ffw_media_settings['media_slug'];
+
+  return $ffw_media_slug;
+}
+
+
+
+
