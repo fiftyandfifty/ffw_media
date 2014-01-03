@@ -63,6 +63,7 @@ function setup_ffw_media_post_types() {
 		'map_meta_cap'      => true,
 		'has_archive' 		=> $archives,
 		'show_in_nav_menus'	=> true,
+		'menu_icon'			=> 'dashicons-editor-video',
 		'hierarchical' 		=> false,
 		'supports' 			=> apply_filters( 'ffw_media_supports', array( 'title', 'editor', 'thumbnail', 'excerpt' ) ),
 	);
