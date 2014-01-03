@@ -167,6 +167,9 @@ function ffw_render_media_fields()
     <?php 
         // If the post has just been updated (in URL there will be $message=1)
         if ( isset($ffw_media_type) ) {
+            // Delete post thumbnail
+            delete_post_thumbnail( get_the_ID() );
+            
             // Set some meta data (featured image), uses /fifty-framework/functions/helpers.php
             if ( preg_match('/youtube/', $ffw_media_type) || preg_match('/vimeo/', $ffw_media_type) ) {
                 // Then it's a video
@@ -174,7 +177,7 @@ function ffw_render_media_fields()
                 $ffw_media_type_id          = get_video_id( $ffw_media_type_url );
 
                 // Update post meta with video ID
-                update_post_meta( $post->ID, 'ffw_media_type_id', $ffw_media_type_id );
+                update_post_meta( get_the_ID(), 'ffw_media_type_id', $ffw_media_type_id );
                 
 
                 ////////////////////////////////////////
@@ -184,9 +187,9 @@ function ffw_render_media_fields()
                 if ( $ffw_media_type_service == 'youtube' ) {
                     $ffw_media_type_thumb_url   = get_video_data( $ffw_media_type_url, 'thumbnail_large' );
                     // Set the meta as the thumb URL
-                    update_post_meta( $post->ID, 'ffw_media_type_thumbnail', $ffw_media_type_thumb_url );
+                    update_post_meta( get_the_ID(), 'ffw_media_type_thumbnail', $ffw_media_type_thumb_url );
                     // @DEPRECATED Set the attachment ID to the meta
-                    // update_post_meta( $post->ID, 'ffw_media_type_attach_id', get_post_thumbnail_id($post->ID) );
+                    // update_post_meta( get_the_ID(), 'ffw_media_type_attach_id', get_post_thumbnail_id(get_the_ID()) );
                     // Set featured image from URL
                     ffw_media_set_featured_image_from_url( $ffw_media_type_thumb_url );
 
@@ -197,7 +200,7 @@ function ffw_render_media_fields()
                 } elseif ( $ffw_media_type_service == 'vimeo' ) {
                     $ffw_media_type_thumb_url   = get_video_data( $ffw_media_type_url, 'thumbnail_large' );
                     // Set the meta as the thumb URL
-                    update_post_meta( $post->ID, 'ffw_media_type_thumbnail', $ffw_media_type_thumb_url );
+                    update_post_meta( get_the_ID(), 'ffw_media_type_thumbnail', $ffw_media_type_thumb_url );
                     // @DEPRECATED Set the attachment ID to the meta
                     // update_post_meta( $post->ID, 'ffw_media_type_attach_id', get_post_thumbnail_id($post->ID) );
                     // Set featured image from URL
@@ -213,7 +216,8 @@ function ffw_render_media_fields()
                 // @TODO get flickr thumb URL (or don't, and give fallback BG and let user set featured? )
             }
         } elseif ( !isset($_GET['message']) ) {
-            // 
+            // Delete post thumbnail
+            delete_post_thumbnail( get_the_ID() );
         }
 
 
@@ -226,7 +230,7 @@ function ffw_render_media_fields()
 
     <?php /* DEBUGGING (temp)
     ================================================== */ 
-    $ffw_media_debugging = false;
+    $ffw_media_debugging = true;
     if ( $ffw_media_debugging ) : ?>
 
         <div id="ffw_media_debugging">
