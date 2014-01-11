@@ -14,7 +14,7 @@
 
   /* MEDIA_TYPE Conditionals 
   ================================================== */
-  function media_type_conditionals(method) {
+  function media_type_conditionals( method ) {
 
     // vars
     var media_type  = $('#ffw_media_type'),
@@ -70,6 +70,7 @@
                     
             // hide all child elements
             media_types_wrap.children().hide();
+
             // empty the field if changed to different, based on stored origin data val
             if ( media_type_url_val.indexOf(selected_opt_val) <= 0 ) {
               media_type_url.val('');
@@ -78,11 +79,17 @@
               media_type_url.val(media_type_url_orig);
               if ( FFW_MEDIA.debug ) console.log('Restored original value: ', media_type_url_orig);
             }
-
+          
             // show the selected option's subfields
             selected_option.show()
+            
             // append the input url field to the select option subfield area
             media_type_url.show().appendTo(selected_option);
+
+            // if wp gallery is selected, no need to show the url field
+            if ( options_arr[i] === 'ffw_media_wp_gallery' ) {
+              media_type_url.hide();
+            }
           }
         }
       });
