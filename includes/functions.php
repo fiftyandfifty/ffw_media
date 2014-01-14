@@ -41,8 +41,8 @@ function ffw_media_set_featured_image_from_url( $img_url = NULL, $curr_post_id =
       $file = $upload_dir['basedir'] . '/' . ($the_post_id . '-' .$filename);
   }
 
-    // if ( !has_post_thumbnail( $post->ID ) && ( $attachment_metadata_file != $filename ) ) {
-    if ( !has_post_thumbnail( $the_post_id ) ) {
+    // if ( !has_post_thumbnail( $the_post_id ) ) {
+    if ( !has_post_thumbnail( $post->ID ) && ( $attachment_metadata_file != $filename ) ) {
 
         // Delete the attachment metadata (redundancy measure)
         delete_post_thumbnail( $the_post_id );
@@ -79,11 +79,11 @@ function ffw_media_set_featured_image_from_url( $img_url = NULL, $curr_post_id =
         set_post_thumbnail( $the_post_id, $attach_id );
 
     } 
-    elseif( has_post_thumbnail( $the_post_id ) ) {
-        // Delete the post attachment
-        delete_post_thumbnail( $the_post_id );
-        wp_delete_attachment( $the_post_id );
-    }
+    // elseif( has_post_thumbnail( $the_post_id ) ) {
+    //     // Delete the post attachment
+    //     delete_post_thumbnail( $the_post_id );
+    //     wp_delete_attachment( $the_post_id );
+    // }
 }
 
 

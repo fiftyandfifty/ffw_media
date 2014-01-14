@@ -59,7 +59,8 @@ function ffw_media_meta_box_save( $post_id ) {
     // The default fields that get saved
     $fields = apply_filters( 'ffw_media_metabox_fields_save', array(
             'ffw_media_type',
-            'ffw_media_type_url'
+            'ffw_media_type_url',
+            'ffw_media_type_featured'
         )
     );
 
@@ -183,10 +184,10 @@ function ffw_render_media_fields()
     // Set post meta as vars (set through form submission)
     $ffw_media_type             = get_post_meta( $post->ID, 'ffw_media_type', true );
     $ffw_media_type_url         = get_post_meta( $post->ID, 'ffw_media_type_url', true );
+    $ffw_media_type_featured    = get_post_meta( $post->ID, 'ffw_media_type_featured', true );
 
 
     $ffw_media_type_thumbnail   = get_post_meta( $post->ID, 'ffw_media_type_thumbnail', true );
-    $ffw_media_type_featured    = get_post_meta( $post->ID, 'ffw_media_type_featured', true );
     $ffw_media_type_service     = get_post_meta( $post->ID, 'ffw_media_type_service', true );
     $ffw_media_type_id          = get_post_meta( $post->ID, 'ffw_media_type_id', true );
 
@@ -199,7 +200,7 @@ function ffw_render_media_fields()
     <p><strong><?php _e( 'Featured', 'ffw_media' ); ?></strong></p>
     <p>
         <label for="ffw_media_type_featured">
-            <input type="checkbox" name="ffw_media_type_featured" id="ffw_media_type_featured" value="1" <?php checked( '1', $ffw_media_type_featured, true ); ?> />
+            <input type="checkbox" name="ffw_media_type_featured" id="ffw_media_type_featured" <?php checked( $instance['ffw_media_type_featured'], true ); ?> />
             <?php _e( 'Check this to add in featured slider on Media landing page.', 'ffw_media' );  ?>
         </label>
     </p>
